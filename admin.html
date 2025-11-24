@@ -373,6 +373,23 @@
               <li><code>POST /api/admin/edit-course</code></li>
             </ul>
           </div>
+
+          <div class="admin-settings-card">
+            <h3>Data Storage</h3>
+            <p class="admin-settings-note">Current data storage location:</p>
+            <div class="admin-storage-info">
+              <p><strong>Mock Data:</strong> Browser localStorage</p>
+              <p><strong>Key:</strong> <code>admin_mock_data</code></p>
+              <p><strong>Auth Data:</strong> Browser localStorage</p>
+              <p><strong>Key:</strong> <code>auth</code></p>
+              <p class="admin-settings-note" style="margin-top: 1rem;">
+                To view/edit: Open DevTools (F12) → Application → Local Storage
+              </p>
+              <button class="admin-primary-btn" style="margin-top: 1rem;" data-action="clearMockData">
+                Clear Mock Data (Reset to Defaults)
+              </button>
+            </div>
+          </div>
         </div>
       </section>
     </main>

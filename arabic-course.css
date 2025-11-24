@@ -1873,6 +1873,20 @@ body.admin-body {
   color: var(--accent-primary);
 }
 
+.admin-storage-info {
+  line-height: 1.8;
+}
+
+.admin-storage-info p {
+  margin: var(--spacing-sm) 0;
+  color: var(--text-secondary);
+}
+
+.admin-storage-info strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
 /* Admin Toggle Switch */
 .admin-toggle {
   position: relative;
@@ -1932,6 +1946,10 @@ body.admin-body {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+}
+
+.admin-modal-overlay[hidden] {
+  display: none !important;
 }
 
 .admin-modal {

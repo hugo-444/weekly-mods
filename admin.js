@@ -72,8 +72,29 @@ const AdminPanel = (() => {
 
   /**
    * Mock data structure (simulates backend)
+   * 
+   * DATA STORAGE LOCATION:
+   * - Currently stored in browser localStorage under key 'admin_mock_data'
+   * - Falls back to hardcoded default data if localStorage is empty
+   * - In production, this would be replaced with API calls to backend
+   * - To view/edit: Open browser DevTools > Application > Local Storage > admin_mock_data
    */
-  const mockData = {
+  
+  /**
+   * Load mock data from localStorage or use defaults
+   */
+  function loadMockData() {
+    try {
+      const stored = localStorage.getItem('admin_mock_data');
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch (e) {
+      console.warn('Failed to load mock data from localStorage:', e);
+    }
+    
+    // Return default data
+    return {
     users: [
       { id: 1, name: 'Ahmed Hassan', email: 'ahmed@example.com', role: 'premium', subscription_status: 'active', created_at: '2024-01-15' },
       { id: 2, name: 'Sarah Johnson', email: 'sarah@example.com', role: 'pro', subscription_status: 'active', created_at: '2024-02-20' },
@@ -119,7 +140,27 @@ const AdminPanel = (() => {
       { user: 'Fatima Al-Rashid', action: 'Downloaded PDF', time: '2 days ago', status: 'success' },
       { user: 'Layla Ahmed', action: 'Completed Week 10', time: '3 days ago', status: 'success' }
     ]
-  };
+    };
+  }
+
+  /**
+   * Save mock data to localStorage
+   */
+  function saveMockData(data) {
+    try {
+      localStorage.setItem('admin_mock_data', JSON.stringify(data));
+    } catch (e) {
+      console.warn('Failed to save mock data to localStorage:', e);
+    }
+  }
+
+  // Initialize mock data (load from storage or use defaults)
+  let mockData = loadMockData();
+  
+  // Save defaults to localStorage on first load
+  if (!localStorage.getItem('admin_mock_data')) {
+    saveMockData(mockData);
+  }
 
   // ========== STATE MANAGEMENT ==========
 
@@ -218,12 +259,32 @@ const AdminPanel = (() => {
       elements.logoutBtn.addEventListener('click', logout);
     }
 
-    // Modal close
+    // Modal close handlers
     const modalClose = document.querySelector('[data-modal-close]');
     if (modalClose) {
-      modalClose.addEventListener('click', () => {
-        if (elements.modal) elements.modal.hidden = true;
+      modalClose.addEventListener('click', closeModal);
+    }
+    
+    // Close modal when clicking outside
+    if (elements.modal) {
+      elements.modal.addEventListener('click', (e) => {
+        // Close if clicking the overlay itself (not the modal content)
+        if (e.target === elements.modal) {
+          closeModal();
+        }
       });
+      
+      // Close modal on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && elements.modal && !elements.modal.hidden) {
+          closeModal();
+        }
+      });
+    }
+    
+    // Ensure modal is hidden on init
+    if (elements.modal) {
+      elements.modal.hidden = true;
     }
 
     // Search inputs
@@ -594,7 +655,11 @@ const AdminPanel = (() => {
       case 'deleteUser':
         const delUserId = element.dataset.userId;
         if (confirm(`Delete user ${delUserId}? This action cannot be undone.`)) {
-          alert('User deletion would be processed via backend API.');
+          // Remove from mock data
+          mockData.users = mockData.users.filter(u => u.id !== parseInt(delUserId));
+          saveMockData(mockData);
+          renderUsersTable();
+          alert('User deleted from mock data. (In production, this would call backend API)');
         }
         break;
       case 'createCourse':
@@ -626,9 +691,40 @@ const AdminPanel = (() => {
         const subId = element.dataset.subId;
         alert(`Edit Subscription ${subId} modal would open here. Backend integration required.`);
         break;
+      case 'clearMockData':
+        if (confirm('Clear all mock data and reset to defaults? This cannot be undone.')) {
+          localStorage.removeItem('admin_mock_data');
+          mockData = loadMockData();
+          saveMockData(mockData);
+          // Refresh current page
+          const currentPage = state.currentPage;
+          showPage(currentPage);
+          alert('Mock data cleared and reset to defaults.');
+        }
+        break;
       default:
         console.log('Unknown action:', actionType);
     }
+  }
+
+  // ========== MODAL FUNCTIONS ==========
+
+  function closeModal() {
+    if (elements.modal) {
+      elements.modal.hidden = true;
+    }
+  }
+
+  function showModal(title, content) {
+    if (!elements.modal) return;
+    
+    const titleEl = elements.modal.querySelector('[data-modal-title]');
+    const bodyEl = elements.modal.querySelector('[data-modal-body]');
+    
+    if (titleEl) titleEl.textContent = title;
+    if (bodyEl) bodyEl.innerHTML = content;
+    
+    elements.modal.hidden = false;
   }
 
   // ========== UTILITY FUNCTIONS ==========
