@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arabic Foundations - Secure Portal</title>
+  <link rel="stylesheet" href="arabic-course.css">
+  <script type="module" src="auth.js" defer></script>
+</head>
+<body class="auth-body">
+  <main class="auth-shell" aria-live="polite">
+    <section class="auth-side-card">
+      <p class="auth-eyebrow">Arabic Foundations</p>
+      <h1>Secure Learning Portal</h1>
+      <p>Log in or create an account to unlock progress tracking, downloadables, and personalized coaching nudges.</p>
+      <div class="side-card-pill">
+        <span>Security tip</span>
+        Use unique passwords and enable two-factor auth once your account is created.
+      </div>
+
+      <div class="auth-guidelines">
+        <div>
+          <h2>Do</h2>
+          <ul class="auth-do-list">
+            <li>Use your program email for faster verification.</li>
+            <li>Keep devices updated before logging in.</li>
+            <li>Review password tips below before submitting.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Don’t</h2>
+          <ul class="auth-dont-list">
+            <li>Share one account with classmates.</li>
+            <li>Paste passwords into shared documents.</li>
+            <li>Ignore suspicious emails requesting resets.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="auth-side-footer">
+        <p>Need help? Email <a class="auth-link" href="mailto:coach@arabic.one">coach@arabic.one</a></p>
+        <p class="mini-note">This UI is frontend-only; your data stays local until integration.</p>
+      </div>
+    </section>
+
+    <section class="auth-panel" aria-live="polite">
+      <div class="auth-tabs" role="tablist" aria-label="Authentication tabs">
+        <button
+          id="auth-tab-login"
+          class="is-active"
+          role="tab"
+          aria-selected="true"
+          aria-controls="screen-login"
+          data-auth-tab="login">
+          Log in
+        </button>
+        <button
+          id="auth-tab-signup"
+          role="tab"
+          aria-selected="false"
+          aria-controls="screen-signup"
+          data-auth-tab="signup">
+          Create account
+        </button>
+      </div>
+
+      <section
+        id="screen-login"
+        class="auth-screen is-active"
+        role="tabpanel"
+        aria-labelledby="auth-tab-login"
+        data-auth-screen="login">
+        <form id="loginForm" class="auth-form" novalidate>
+          <div class="form-heading">
+            <h2>Welcome back</h2>
+            <p>Use your Arabic Foundations email to access the studio.</p>
+          </div>
+
+          <div class="input-group">
+            <div class="input-field">
+              <input
+                id="loginEmail"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder=" "
+                required
+                data-validate="email"
+                aria-describedby="loginEmailMessage">
+              <label for="loginEmail">Email address</label>
+            </div>
+            <p class="validation-message" id="loginEmailMessage" aria-live="polite"></p>
+          </div>
+
+          <div class="input-group">
+            <div class="input-field input-field--with-toggle">
+              <input
+                id="loginPassword"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder=" "
+                required
+                data-validate="password-basic"
+                aria-describedby="loginPasswordMessage">
+              <label for="loginPassword">Password</label>
+              <button
+                type="button"
+                class="toggle-password"
+                data-password-toggle
+                aria-controls="loginPassword"
+                aria-pressed="false">
+                Show
+              </button>
+            </div>
+            <p class="validation-message" id="loginPasswordMessage" aria-live="polite"></p>
+          </div>
+
+          <div class="form-row">
+            <label class="checkbox-control">
+              <input type="checkbox" id="rememberDevice">
+              <span>Remember me on this device</span>
+            </label>
+            <button type="button" class="link-button" data-auth-link="forgot">Forgot password?</button>
+          </div>
+
+          <div class="form-alert" data-form-alert="login" role="status" aria-live="polite" hidden></div>
+
+          <button type="submit" class="primary-btn" data-loading-text="Signing you in...">Log in</button>
+
+          <p class="form-footnote">
+            Need an account?
+            <button type="button" class="link-button" data-auth-link="signup">Create one</button>
+          </p>
+        </form>
+      </section>
+
+      <section
+        id="screen-signup"
+        class="auth-screen"
+        role="tabpanel"
+        aria-labelledby="auth-tab-signup"
+        data-auth-screen="signup">
+        <form id="signupForm" class="auth-form" novalidate>
+          <div class="form-heading">
+            <h2>Create your account</h2>
+            <p>Set a strong password now; backend integration will plug into this UI later.</p>
+          </div>
+
+          <div class="input-grid">
+            <div class="input-group">
+              <div class="input-field">
+                <input
+                  id="signupName"
+                  name="fullName"
+                  type="text"
+                  autocomplete="name"
+                  placeholder=" "
+                  required
+                  minlength="2"
+                  data-validate="text"
+                  aria-describedby="signupNameMessage">
+                <label for="signupName">Full name</label>
+              </div>
+              <p class="validation-message" id="signupNameMessage" aria-live="polite"></p>
+            </div>
+
+            <div class="input-group">
+              <div class="input-field">
+                <input
+                  id="signupEmail"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  placeholder=" "
+                  required
+                  data-validate="email"
+                  aria-describedby="signupEmailMessage">
+                <label for="signupEmail">Program email</label>
+              </div>
+              <p class="validation-message" id="signupEmailMessage" aria-live="polite"></p>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="input-field input-field--with-toggle">
+              <input
+                id="signupPassword"
+                name="password"
+                type="password"
+                autocomplete="new-password"
+                placeholder=" "
+                required
+                data-validate="password"
+                aria-describedby="signupPasswordMessage strengthDescription">
+              <label for="signupPassword">Create password</label>
+              <button
+                type="button"
+                class="toggle-password"
+                data-password-toggle
+                aria-controls="signupPassword"
+                aria-pressed="false">
+                Show
+              </button>
+            </div>
+            <p class="validation-message" id="signupPasswordMessage" aria-live="polite"></p>
+          </div>
+
+          <div class="input-group">
+            <div class="input-field input-field--with-toggle">
+              <input
+                id="signupConfirm"
+                name="confirmPassword"
+                type="password"
+                autocomplete="new-password"
+                placeholder=" "
+                required
+                data-validate="confirm"
+                data-confirm-target="signupPassword"
+                aria-describedby="signupConfirmMessage">
+              <label for="signupConfirm">Confirm password</label>
+              <button
+                type="button"
+                class="toggle-password"
+                data-password-toggle
+                aria-controls="signupConfirm"
+                aria-pressed="false">
+                Show
+              </button>
+            </div>
+            <p class="validation-message" id="signupConfirmMessage" aria-live="polite"></p>
+          </div>
+
+          <div class="password-meter" aria-live="polite">
+            <div class="meter-track">
+              <span class="meter-bar" data-strength-bar></span>
+            </div>
+            <p class="meter-label" id="strengthDescription" data-strength-label>Make your password memorable and strong.</p>
+          </div>
+
+          <ul class="password-hints" role="list">
+            <li data-password-rule="length">At least 8 characters</li>
+            <li data-password-rule="case">Upper and lower case letters</li>
+            <li data-password-rule="number">At least one number</li>
+            <li data-password-rule="special">One special character (!@#$%)</li>
+          </ul>
+
+          <label class="checkbox-control terms-control">
+            <input type="checkbox" id="termsConsent" required>
+            <span>I agree to the cohort code of conduct and data policy.</span>
+          </label>
+
+          <button type="submit" class="primary-btn" data-loading-text="Creating your account...">Create account</button>
+
+          <p class="form-footnote">
+            Already registered?
+            <button type="button" class="link-button" data-auth-link="login">Return to login</button>
+          </p>
+        </form>
+      </section>
+
+      <section
+        id="screen-forgot"
+        class="auth-screen"
+        role="region"
+        aria-label="Forgot password"
+        data-auth-screen="forgot">
+        <form id="forgotForm" class="auth-form" novalidate>
+          <div class="form-heading">
+            <h2>Reset your password</h2>
+            <p>Enter the email you use for Arabic Foundations and we will send you a reset link.</p>
+          </div>
+
+          <div class="input-group">
+            <div class="input-field">
+              <input
+                id="forgotEmail"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder=" "
+                required
+                data-validate="email"
+                aria-describedby="forgotEmailMessage">
+              <label for="forgotEmail">Email address</label>
+            </div>
+            <p class="validation-message" id="forgotEmailMessage" aria-live="polite"></p>
+          </div>
+
+          <div class="form-alert info-alert">
+            We will never send password reset links we didn’t request; always verify the sender address.
+          </div>
+
+          <button type="submit" class="primary-btn" data-loading-text="Sending reset link...">Send reset link</button>
+
+          <p class="form-footnote">
+            Remembered your password?
+            <button type="button" class="link-button" data-auth-link="login">Back to login</button>
+          </p>
+        </form>
+      </section>
+
+      <section
+        id="screen-reset"
+        class="auth-screen auth-screen--status"
+        role="region"
+        aria-label="Reset confirmation"
+        data-auth-screen="reset-confirm">
+        <div class="status-card">
+          <div class="status-icon status-icon--mail" aria-hidden="true"></div>
+          <h2>Check your inbox</h2>
+          <p>
+            We emailed reset instructions to
+            <span class="status-highlight" data-reset-email>you@example.com</span>.
+            The link expires in 15 minutes.
+          </p>
+          <div class="status-actions">
+            <button type="button" class="primary-btn" data-auth-link="login">Return to login</button>
+            <button type="button" class="link-button" data-auth-link="forgot">Use a different email</button>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="screen-signup-success"
+        class="auth-screen auth-screen--status"
+        role="region"
+        aria-label="Account creation success"
+        data-auth-screen="signup-success">
+        <div class="status-card">
+          <div class="status-icon status-icon--check" aria-hidden="true"></div>
+          <h2>Account ready</h2>
+          <p>
+            Welcome, <span class="status-highlight" data-account-name>new learner</span>!
+            You can now log in to sync study plans across devices once the backend is wired up.
+          </p>
+          <ul class="status-list">
+            <li>Bookmark this portal for faster access.</li>
+            <li>Keep your password manager updated.</li>
+            <li>Expect a confirmation email shortly.</li>
+          </ul>
+          <div class="status-actions">
+            <button type="button" class="primary-btn" data-auth-link="login">Go to login</button>
+            <button type="button" class="link-button" data-auth-link="signup">Create another</button>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
+
