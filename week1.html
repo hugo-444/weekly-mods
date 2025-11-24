@@ -3,10 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <title>Arabic Foundations — Week 1</title>
-    <link rel="stylesheet" href="course-style.css">
+    <link rel="stylesheet" href="arabic-course.css">
 </head>
 
 <body>
+
+    /* --------------------------------------------------------------- */
+/*                       LEFT SIDEBAR NAVIGATION                   */
+/* --------------------------------------------------------------- */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 210px;
+  height: 100vh;
+  background: #f0ebe3;
+  border-right: 1px solid var(--border-soft);
+  padding: 2rem 1.3rem;
+  overflow-y: auto;
+}
+
+.sidebar-title {
+  font-family: "Manufacturing Consent", cursive;
+  font-weight: 200;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.6rem;
+  border-bottom: 1px solid var(--border-soft);
+  padding-bottom: 0.4rem;
+}
+
+.nav-section-label {
+  font-family: "Teko", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+  margin-bottom: 0.3rem;
+  color: #6f5a4b;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.sidebar li {
+  margin-bottom: 0.45rem;
+}
+
+.sidebar a {
+  text-decoration: none;
+  font-family: "Merriweather", serif;
+  font-size: 0.92rem;
+  color: var(--ink);
+  transition: 0.2s ease;
+}
+
+.sidebar a:hover {
+  color: var(--accent);
+  padding-left: 4px;
+}
+
+.sidebar .active {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+/* Push page content right to make room for sidebar */
+.page {
+  margin-left: 230px;
+}
 
 <div class="page">
 
