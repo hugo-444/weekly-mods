@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — Arabic Foundations</title>
+  <link rel="stylesheet" href="arabic-course.css">
+  <script type="module" src="admin.js" defer></script>
+</head>
+<body class="admin-body">
+  <!-- Admin Header -->
+  <header class="admin-header">
+    <div class="admin-header-content">
+      <h1 class="admin-logo">Arabic Foundations Admin</h1>
+      <div class="admin-header-actions">
+        <span class="admin-user-info" data-admin-user-display>Loading...</span>
+        <button class="admin-logout-btn" data-admin-logout>Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Admin Layout Container -->
+  <div class="admin-container">
+    <!-- Left Sidebar Navigation -->
+    <aside class="admin-sidebar" data-admin-sidebar>
+      <nav class="admin-nav">
+        <ul class="admin-nav-list">
+          <li>
+            <a href="#dashboard" class="admin-nav-link is-active" data-admin-page="dashboard">
+              <span class="admin-nav-icon">📊</span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="#users" class="admin-nav-link" data-admin-page="users">
+              <span class="admin-nav-icon">👥</span>
+              <span>Users</span>
+            </a>
+          </li>
+          <li>
+            <a href="#subscriptions" class="admin-nav-link" data-admin-page="subscriptions">
+              <span class="admin-nav-icon">💳</span>
+              <span>Subscriptions</span>
+            </a>
+          </li>
+          <li>
+            <a href="#courses" class="admin-nav-link" data-admin-page="courses">
+              <span class="admin-nav-icon">📚</span>
+              <span>Courses</span>
+            </a>
+          </li>
+          <li>
+            <a href="#modules" class="admin-nav-link" data-admin-page="modules">
+              <span class="admin-nav-icon">📖</span>
+              <span>Modules</span>
+            </a>
+          </li>
+          <li>
+            <a href="#settings" class="admin-nav-link" data-admin-page="settings">
+              <span class="admin-nav-icon">⚙️</span>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main" data-admin-main>
+      <!-- Dashboard Page -->
+      <section class="admin-page is-active" data-admin-page-content="dashboard">
+        <div class="admin-page-header">
+          <h2>Dashboard Overview</h2>
+          <p class="admin-page-subtitle">Platform analytics and key metrics</p>
+        </div>
+
+        <!-- Stat Cards Grid -->
+        <div class="admin-stats-grid">
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon" style="background: rgba(139, 107, 75, 0.1);">👥</div>
+            <div class="admin-stat-content">
+              <div class="admin-stat-value" data-stat="totalUsers">0</div>
+              <div class="admin-stat-label">Total Users</div>
+            </div>
+          </div>
+
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon" style="background: rgba(79, 124, 87, 0.1);">⭐</div>
+            <div class="admin-stat-content">
+              <div class="admin-stat-value" data-stat="premiumUsers">0</div>
+              <div class="admin-stat-label">Premium Users</div>
+            </div>
+          </div>
+
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon" style="background: rgba(165, 42, 42, 0.1);">🚀</div>
+            <div class="admin-stat-content">
+              <div class="admin-stat-value" data-stat="proUsers">0</div>
+              <div class="admin-stat-label">Pro Users</div>
+            </div>
+          </div>
+
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon" style="background: rgba(111, 122, 138, 0.1);">📚</div>
+            <div class="admin-stat-content">
+              <div class="admin-stat-value" data-stat="activeCourses">0</div>
+              <div class="admin-stat-label">Active Courses</div>
+            </div>
+          </div>
+
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon" style="background: rgba(53, 90, 146, 0.1);">📖</div>
+            <div class="admin-stat-content">
+              <div class="admin-stat-value" data-stat="totalModules">0</div>
+              <div class="admin-stat-label">Total Modules</div>
+            </div>
+          </div>
+
+          <div class="admin-stat-card">
+            <div class="admin-stat-icon" style="background: rgba(47, 122, 95, 0.1);">✅</div>
+            <div class="admin-stat-content">
+              <div class="admin-stat-value" data-stat="activeSubscriptions">0</div>
+              <div class="admin-stat-label">Active Subscriptions</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Role Distribution Chart Placeholder -->
+        <div class="admin-graph-card">
+          <div class="admin-graph-header">
+            <h3>User Role Distribution</h3>
+            <button class="admin-refresh-btn" data-refresh="roleChart">Refresh</button>
+          </div>
+          <div class="admin-graph-content" data-graph="roleDistribution">
+            <canvas id="roleChart" width="400" height="200"></canvas>
+            <p class="admin-graph-fallback">Chart visualization will appear here when backend is integrated.</p>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="admin-table-card">
+          <div class="admin-table-header">
+            <h3>Recent User Activity</h3>
+            <button class="admin-refresh-btn" data-refresh="activity">Refresh</button>
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Action</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody data-table="recentActivity">
+                <tr>
+                  <td colspan="4" class="admin-table-empty">Loading activity data...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Users Page -->
+      <section class="admin-page" data-admin-page-content="users">
+        <div class="admin-page-header">
+          <h2>User Management</h2>
+          <div class="admin-page-actions">
+            <input type="search" class="admin-search-input" placeholder="Search users..." data-search="users">
+            <button class="admin-primary-btn" data-action="createUser">+ Add User</button>
+          </div>
+        </div>
+
+        <div class="admin-table-card">
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Subscription</th>
+                  <th>Joined</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody data-table="users">
+                <tr>
+                  <td colspan="7" class="admin-table-empty">Loading users...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="admin-pagination" data-pagination="users">
+            <button class="admin-pagination-btn" data-page="prev" disabled>Previous</button>
+            <span class="admin-pagination-info" data-page-info>Page 1 of 1</span>
+            <button class="admin-pagination-btn" data-page="next" disabled>Next</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Subscriptions Page -->
+      <section class="admin-page" data-admin-page-content="subscriptions">
+        <div class="admin-page-header">
+          <h2>Subscription Management</h2>
+          <div class="admin-page-actions">
+            <select class="admin-filter-select" data-filter="subscriptionStatus">
+              <option value="all">All Statuses</option>
+              <option value="active">Active</option>
+              <option value="canceled">Canceled</option>
+              <option value="past_due">Past Due</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="admin-stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+          <div class="admin-stat-card">
+            <div class="admin-stat-value" data-stat="activeSubs">0</div>
+            <div class="admin-stat-label">Active Subscriptions</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-value" data-stat="monthlyRevenue">$0</div>
+            <div class="admin-stat-label">Monthly Recurring Revenue</div>
+          </div>
+          <div class="admin-stat-card">
+            <div class="admin-stat-value" data-stat="churnRate">0%</div>
+            <div class="admin-stat-label">Churn Rate</div>
+          </div>
+        </div>
+
+        <div class="admin-table-card">
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Plan</th>
+                  <th>Status</th>
+                  <th>Started</th>
+                  <th>Next Billing</th>
+                  <th>Amount</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody data-table="subscriptions">
+                <tr>
+                  <td colspan="7" class="admin-table-empty">Loading subscriptions...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Courses Page -->
+      <section class="admin-page" data-admin-page-content="courses">
+        <div class="admin-page-header">
+          <h2>Course Management</h2>
+          <div class="admin-page-actions">
+            <button class="admin-primary-btn" data-action="createCourse">+ Create Course</button>
+          </div>
+        </div>
+
+        <div class="admin-table-card">
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Modules</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody data-table="courses">
+                <tr>
+                  <td colspan="6" class="admin-table-empty">Loading courses...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Modules Page -->
+      <section class="admin-page" data-admin-page-content="modules">
+        <div class="admin-page-header">
+          <h2>Module Management</h2>
+          <div class="admin-page-actions">
+            <select class="admin-filter-select" data-filter="courseFilter">
+              <option value="all">All Courses</option>
+            </select>
+            <button class="admin-primary-btn" data-action="createModule">+ Create Module</button>
+          </div>
+        </div>
+
+        <div class="admin-table-card">
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Course</th>
+                  <th>Week</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody data-table="modules">
+                <tr>
+                  <td colspan="6" class="admin-table-empty">Loading modules...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings Page -->
+      <section class="admin-page" data-admin-page-content="settings">
+        <div class="admin-page-header">
+          <h2>System Settings</h2>
+          <p class="admin-page-subtitle">Platform configuration and preferences</p>
+        </div>
+
+        <div class="admin-settings-grid">
+          <div class="admin-settings-card">
+            <h3>General Settings</h3>
+            <div class="admin-setting-item">
+              <label>Platform Name</label>
+              <input type="text" class="admin-input" value="Arabic Foundations" data-setting="platformName">
+            </div>
+            <div class="admin-setting-item">
+              <label>Support Email</label>
+              <input type="email" class="admin-input" value="coach@arabic.one" data-setting="supportEmail">
+            </div>
+            <div class="admin-setting-item">
+              <label>Maintenance Mode</label>
+              <label class="admin-toggle">
+                <input type="checkbox" data-setting="maintenanceMode">
+                <span class="admin-toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="admin-settings-card">
+            <h3>Subscription Tiers</h3>
+            <div class="admin-setting-item">
+              <label>Premium Price (Monthly)</label>
+              <input type="number" class="admin-input" value="29" data-setting="premiumPrice">
+            </div>
+            <div class="admin-setting-item">
+              <label>Pro Price (Monthly)</label>
+              <input type="number" class="admin-input" value="49" data-setting="proPrice">
+            </div>
+            <button class="admin-primary-btn" style="margin-top: 1rem;">Save Pricing</button>
+          </div>
+
+          <div class="admin-settings-card">
+            <h3>API Endpoints</h3>
+            <p class="admin-settings-note">Future backend integration points:</p>
+            <ul class="admin-api-list">
+              <li><code>GET /api/admin/users</code></li>
+              <li><code>GET /api/admin/subscriptions</code></li>
+              <li><code>GET /api/admin/courses</code></li>
+              <li><code>POST /api/admin/create-module</code></li>
+              <li><code>POST /api/admin/edit-course</code></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal Overlay (for future modals) -->
+  <div class="admin-modal-overlay" data-admin-modal hidden>
+    <div class="admin-modal">
+      <div class="admin-modal-header">
+        <h3 data-modal-title>Modal Title</h3>
+        <button class="admin-modal-close" data-modal-close>×</button>
+      </div>
+      <div class="admin-modal-body" data-modal-body>
+        <!-- Modal content will be injected here -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
